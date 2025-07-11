@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>limelii - Discover Your Next Adventure</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -22,6 +23,7 @@
             color: #0a0a0a;
             overflow-x: hidden;
             background: #ffffff;
+            font-weight: 300; /* Thinner default weight */
         }
 
         /* Brand Colors */
@@ -45,364 +47,50 @@
             --gray-900: #171717;
         }
 
-        /* Clean Icons using CSS */
+        /* Better Font Weights */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 200; /* Much thinner headers */
+        }
+
+        .hero h1 {
+            font-weight: 100; /* Ultra thin for main heading */
+        }
+
+        .btn {
+            font-weight: 400; /* Thinner button text */
+        }
+
+        .nav-links a {
+            font-weight: 300; /* Thinner nav links */
+        }
+
+        /* Font Awesome Icons instead of CSS icons */
         .icon {
             width: 24px;
             height: 24px;
-            position: relative;
-            display: inline-block;
-            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
 
-        .icon-target::before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-        }
-
-        .icon-target::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: currentColor;
-            border-radius: 50%;
-            top: 7px;
-            left: 7px;
-        }
-
-        .icon-sparkle::before {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 14px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 3px;
-            left: 9px;
-        }
-
-        .icon-sparkle::after {
-            content: '';
-            position: absolute;
-            width: 14px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 9px;
-            left: 3px;
-        }
-
-        .icon-mobile::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 16px;
-            border: 2px solid currentColor;
-            border-radius: 2px;
-            top: 2px;
-            left: 5px;
-        }
-
-        .icon-mobile::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            height: 1px;
-            background: currentColor;
-            border-radius: 1px;
-            bottom: 4px;
-            left: 8px;
-        }
-
-        .icon-community::before {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            top: 3px;
-            left: 7px;
-        }
-
-        .icon-community::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 6px;
-            border: 2px solid currentColor;
-            border-top: none;
-            border-radius: 0 0 8px 8px;
-            bottom: 3px;
-            left: 2px;
-        }
-
-        .icon-cross::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 9px;
-            left: 4px;
-            transform: rotate(45deg);
-        }
-
-        .icon-cross::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 9px;
-            left: 4px;
-            transform: rotate(-45deg);
-        }
-
-        .icon-search::before {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-        }
-
-        .icon-search::after {
-            content: '';
-            position: absolute;
-            width: 5px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 1px;
-            bottom: 3px;
-            right: 3px;
-            transform: rotate(45deg);
-        }
-
-        .icon-question::before {
-            content: '?';
-            position: absolute;
-            font-size: 14px;
-            font-weight: 700;
-            top: 2px;
-            left: 6px;
-            font-family: inherit;
-        }
-
-        .icon-grid::before {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 4px;
-            left: 4px;
-            box-shadow: 6px 0 0 currentColor, 0 6px 0 currentColor, 6px 6px 0 currentColor;
-        }
-
-        .icon-food::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 6px;
-            border: 2px solid currentColor;
-            border-radius: 6px 6px 0 0;
-            top: 10px;
-            left: 4px;
-        }
-
-        .icon-food::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 6px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 4px;
-            left: 9px;
-        }
-
-        .icon-nature::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 8px solid currentColor;
-            top: 6px;
-            left: 4px;
-        }
-
-        .icon-nature::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-bottom: 6px solid currentColor;
-            top: 9px;
-            left: 8px;
-        }
-
-        .icon-wellness::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            top: 4px;
-            left: 4px;
-        }
-
-        .icon-wellness::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: currentColor;
-            border-radius: 50%;
-            top: 8px;
-            left: 8px;
-        }
-
-        .icon-art::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 14px;
-            border: 2px solid currentColor;
-            border-radius: 1px;
-            top: 3px;
-            left: 5px;
-        }
-
-        .icon-art::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 7px;
-            left: 8px;
-        }
-
-        .icon-sun::before {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: currentColor;
-            border-radius: 50%;
-            top: 7px;
-            left: 7px;
-        }
-
-        .icon-sun::after {
-            content: '';
-            position: absolute;
-            width: 1px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 2px;
-            left: 10px;
-            box-shadow: 0 16px 0 currentColor, 8px 7px 0 currentColor, -8px 7px 0 currentColor, 6px 2px 0 currentColor, -6px 2px 0 currentColor, 6px 12px 0 currentColor, -6px 12px 0 currentColor;
-        }
-
-        .icon-entertainment::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 8px solid currentColor;
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            top: 5px;
-            left: 6px;
-        }
-
-        .icon-rocket::before {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 12px;
-            background: currentColor;
-            border-radius: 2px 2px 0 0;
-            top: 3px;
-            left: 8px;
-        }
-
-        .icon-rocket::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 2px solid transparent;
-            border-right: 2px solid transparent;
-            border-top: 4px solid currentColor;
-            bottom: 3px;
-            left: 8px;
-        }
-
-        .icon-lightbulb::before {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 8px;
-            background: currentColor;
-            border-radius: 3px 3px 0 0;
-            top: 4px;
-            left: 7px;
-        }
-
-        .icon-lightbulb::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 2px;
-            border: 1px solid currentColor;
-            border-radius: 0 0 1px 1px;
-            bottom: 4px;
-            left: 6px;
-        }
-
-        .icon-gift::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 6px;
-            border: 2px solid currentColor;
-            border-radius: 1px;
-            bottom: 4px;
-            left: 5px;
-        }
-
-        .icon-gift::after {
-            content: '';
-            position: absolute;
-            width: 14px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 1px;
-            top: 8px;
-            left: 3px;
-        }
+        .icon-target::before { content: '\f140'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-sparkle::before { content: '\f005'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-mobile::before { content: '\f3cd'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-community::before { content: '\f0c0'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-cross::before { content: '\f00d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-search::before { content: '\f002'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-question::before { content: '\f059'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-grid::before { content: '\f009'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-food::before { content: '\f2e7'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-nature::before { content: '\f6fc'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-wellness::before { content: '\f004'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-art::before { content: '\f1fc'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-sun::before { content: '\f185'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-entertainment::before { content: '\f04b'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-rocket::before { content: '\f135'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-lightbulb::before { content: '\f0eb'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-gift::before { content: '\f06b'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
 
         /* Navigation */
         .nav {
@@ -540,7 +228,7 @@
         .app-preview {
             width: 100%;
             height: 100%;
-            background-image: url('data:image/png;base64,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');
+            background-image: url('./mockPhoto.png');
             background-size: cover;
             background-position: center;
             border-radius: 25px;
