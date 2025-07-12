@@ -23,7 +23,7 @@
             color: #0a0a0a;
             overflow-x: hidden;
             background: #ffffff;
-            font-weight: 300; /* Thinner default weight */
+            font-weight: 300;
         }
 
         /* Brand Colors */
@@ -49,22 +49,22 @@
 
         /* Better Font Weights */
         h1, h2, h3, h4, h5, h6 {
-            font-weight: 200; /* Much thinner headers */
+            font-weight: 200;
         }
 
         .hero h1 {
-            font-weight: 100; /* Ultra thin for main heading */
+            font-weight: 100;
         }
 
         .btn {
-            font-weight: 400; /* Thinner button text */
+            font-weight: 400;
         }
 
         .nav-links a {
-            font-weight: 300; /* Thinner nav links */
+            font-weight: 300;
         }
 
-        /* Font Awesome Icons instead of CSS icons */
+        /* Font Awesome Icons */
         .icon {
             width: 24px;
             height: 24px;
@@ -92,7 +92,7 @@
         .icon-lightbulb::before { content: '\f0eb'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
         .icon-gift::before { content: '\f06b'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
 
-        /* Navigation floating over hero */
+        /* Navigation - FIXED PADDING */
         .nav {
             position: fixed;
             top: 0;
@@ -113,25 +113,94 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 24px 32px; /* FIXED PIXEL VALUES */
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 7.8rem;
+            font-size: 3.4rem; /* INCREASED LOGO SIZE */
             font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             letter-spacing: -0.02em;
             transition: all 0.3s ease;
+            line-height: 1; /* Prevents vertical expansion */
         }
 
         .nav-links {
             display: flex;
             gap: 3rem;
             align-items: center;
+        }
+
+        /* Hamburger Menu - FIXED */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled .hamburger span {
+            background: var(--gray-700);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary);
+            transform: scale(1.1);
         }
 
         .nav-links a {
@@ -174,7 +243,7 @@
             color: var(--primary);
         }
 
-        /* Hero Section with NYC Background */
+        /* Hero Section - FIXED MOBILE BACKGROUND */
         .hero {
             min-height: 100vh;
             display: grid;
@@ -186,7 +255,7 @@
                         url('./highline.png');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: scroll;
             position: relative;
             overflow: hidden;
             color: white;
@@ -217,16 +286,16 @@
             align-items: center;
         }
 
-        /* Sleeker Phone Mockup */
+        /* Phone Mockup - THINNER BORDERS */
         .phone-mockup {
-            width: 220px;
+            width: 320px;
             height: 640px;
             background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
-            border-radius: 60px;
+            border-radius: 50px;
             position: relative;
             box-shadow: 
-                0 0 0 8px rgba(255, 255, 255, 0.1),
-                0 0 0 16px rgba(255, 255, 255, 0.05),
+                0 0 0 3px rgba(255, 255, 255, 0.1),
+                0 0 0 6px rgba(255, 255, 255, 0.05),
                 0 30px 80px rgba(0, 0, 0, 0.4),
                 inset 0 2px 4px rgba(255, 255, 255, 0.1);
             transform: rotate(-8deg) perspective(1000px) rotateY(15deg);
@@ -237,8 +306,8 @@
         .phone-mockup:hover {
             transform: rotate(-3deg) perspective(1000px) rotateY(5deg) scale(1.02);
             box-shadow: 
-                0 0 0 8px rgba(255, 255, 255, 0.15),
-                0 0 0 16px rgba(255, 255, 255, 0.08),
+                0 0 0 4px rgba(255, 255, 255, 0.15),
+                0 0 0 8px rgba(255, 255, 255, 0.08),
                 0 40px 100px rgba(0, 0, 0, 0.5),
                 inset 0 2px 4px rgba(255, 255, 255, 0.15);
         }
@@ -254,24 +323,28 @@
 
         .phone-screen {
             position: absolute;
-            top: 25px;
-            left: 25px;
-            right: 25px;
-            bottom: 25px;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
             background: #000;
             border-radius: 35px;
             overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .app-preview {
             width: 100%;
             height: 100%;
             background-image: url('./mockPhoto.PNG');
-            background-size: cover;
-            background-position: center;
             border-radius: 33px;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .app-preview::before {
@@ -288,7 +361,7 @@
             border-radius: 33px;
         }
 
-        /* Updated Floating Cards for Dark Hero */
+        /* Floating Cards */
         .floating-cards {
             position: absolute;
             width: 140px;
@@ -333,11 +406,6 @@
             top: 45%;
             right: 2%;
             animation: floatUp 8s ease-in-out infinite 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
         }
 
         @keyframes floatUp {
@@ -442,7 +510,7 @@
             }
         }
 
-        /* Flowing Sections */
+        /* Sections */
         .section {
             padding: 8rem 2rem;
             position: relative;
@@ -460,6 +528,7 @@
             color: var(--dark);
             letter-spacing: -0.03em;
             line-height: 1.1;
+            text-align: center;
         }
 
         .section-subtitle {
@@ -468,98 +537,19 @@
             margin-bottom: 5rem;
             max-width: 700px;
             line-height: 1.6;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Problem Section with Asymmetric Layout */
-        .problem-section {
-            background: var(--gray-50);
-            margin: 0;
-            max-width: 100%;
-            position: relative;
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-
-        .problem-content h2 {
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-
-        .problem-visual {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .problem-card {
-            background: white;
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            border: 1px solid var(--gray-200);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .problem-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(232, 90, 123, 0.05), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .problem-card:hover::before {
-            left: 100%;
-        }
-
-        .problem-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
-        }
-
-        .problem-card .icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: rgba(232, 90, 123, 0.1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-
-        .problem-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .problem-card p {
-            color: var(--gray-500);
-            line-height: 1.7;
-        }
-
-        /* Features with Bento Grid Layout */
+        /* Features Section */
         .features-section {
             background: white;
         }
 
-        .features-bento {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 200px);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 5rem;
         }
@@ -569,25 +559,10 @@
             border-radius: 24px;
             border: 1px solid var(--gray-200);
             padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            text-align: center;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-        }
-
-        .feature-card.large {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .feature-card.tall {
-            grid-row: span 2;
-        }
-
-        .feature-card.wide {
-            grid-column: span 2;
         }
 
         .feature-card::before {
@@ -620,7 +595,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin: 0 auto 2rem;
             color: var(--primary);
         }
 
@@ -637,222 +612,6 @@
             font-size: 1rem;
         }
 
-        /* Curvy Experience Section like the reference image */
-        .experience-section {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
-            color: white;
-            margin: 0;
-            max-width: 100%;
-            position: relative;
-            margin-top: 8rem;
-            margin-bottom: 8rem;
-            clip-path: ellipse(100% 100% at 50% 0%);
-            padding-top: 12rem;
-            padding-bottom: 12rem;
-        }
-
-        .experience-section::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
-            clip-path: ellipse(100% 100% at 50% 100%);
-        }
-
-        .experience-section::after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
-            clip-path: ellipse(100% 100% at 50% 0%);
-        }
-
-        .experience-content {
-            position: relative;
-            z-index: 2;
-            padding: 0 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .experience-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 5rem;
-        }
-
-        .experience-card {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.5s ease;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .experience-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-8px);
-            border-color: rgba(232, 90, 123, 0.4);
-        }
-
-        .experience-card .icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: white;
-        }
-
-        .experience-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .experience-card p {
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        /* Beta Section with Split Layout */
-        .beta-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            margin: 0;
-            max-width: 100%;
-            position: relative;
-        }
-
-        .beta-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-
-        .beta-content h2 {
-            color: white;
-            text-align: left;
-        }
-
-        .beta-visual {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .beta-card {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            transition: all 0.4s ease;
-        }
-
-        .beta-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(10px);
-        }
-
-        .beta-card .icon-wrapper {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-
-        .beta-card h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-        }
-
-        .beta-card p {
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        /* Waitlist Section */
-        .waitlist-section {
-            background: white;
-            text-align: center;
-        }
-
-        .waitlist-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .waitlist-form {
-            display: flex;
-            gap: 1rem;
-            margin-top: 3rem;
-            padding: 1rem;
-            background: var(--gray-50);
-            border-radius: 60px;
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
-        }
-
-        .waitlist-form:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(232, 90, 123, 0.1);
-        }
-
-        .waitlist-input {
-            flex: 1;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            background: transparent;
-            font-family: inherit;
-        }
-
-        .waitlist-input:focus {
-            outline: none;
-        }
-
-        .waitlist-input::placeholder {
-            color: var(--gray-500);
-        }
-
-        .waitlist-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .waitlist-btn:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
         /* Footer */
         .footer {
             background: var(--gray-900);
@@ -866,116 +625,36 @@
             margin: 0 auto;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        /* Enhanced Mobile Responsive Design */
-        @media (max-width: 1024px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
-                padding: 6rem 1.5rem 2rem;
-            }
-
-            .hero-content {
-                padding-left: 0;
-                max-width: 100%;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-                line-height: 1.1;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-                margin-bottom: 2.5rem;
-            }
-
-            .problem-grid,
-            .beta-grid {
-                grid-template-columns: 1fr;
-                gap: 4rem;
-                text-align: center;
-            }
-
-            .problem-content h2,
-            .beta-content h2 {
-                text-align: center;
-            }
-
-            .features-bento {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(4, 180px);
-                gap: 1.5rem;
-            }
-
-            .feature-card.large {
-                grid-column: span 2;
-                grid-row: span 1;
-                padding: 2rem 1.5rem;
-            }
-
-            .feature-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .phone-mockup {
-                width: 280px;
-                height: 560px;
-            }
-
-            .floating-cards {
-                width: 100px;
-                height: 70px;
-                font-size: 0.7rem;
-            }
-
-            .section {
-                padding: 6rem 1.5rem;
-            }
-
-            .section h2 {
-                font-size: 3rem;
-            }
-        }
-
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .nav-container {
-                padding: 1rem 1.5rem;
+                padding: 16px 24px; /* FIXED PIXEL VALUES */
             }
 
             .nav-links {
                 display: none;
             }
 
+            .hamburger {
+                display: flex; /* NOW SHOWS ON MOBILE */
+            }
+
             .hero {
-                padding: 5rem 1rem 2rem;
-                gap: 2.5rem;
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding: 6rem 1rem 3rem;
+                /* EXPLICIT MOBILE BACKGROUND */
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
+                            url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+                background-size: cover;
+                background-position: center;
+                background-attachment: scroll;
+            }
+
+            .hero-content {
+                padding-left: 0;
+                max-width: 100%;
             }
 
             .hero h1 {
@@ -1004,28 +683,21 @@
                 justify-content: center;
             }
 
-            .features-bento {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                gap: 1.5rem;
+            .phone-mockup {
+                width: 260px;
+                height: 520px;
+                margin: 0 auto;
             }
 
-            .feature-card.large,
-            .feature-card.tall,
-            .feature-card.wide {
-                grid-column: span 1;
-                grid-row: span 1;
+            .phone-screen {
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
             }
 
-            .feature-card {
-                padding: 2rem 1.5rem;
-                text-align: center;
-            }
-
-            .feature-icon {
-                width: 60px;
-                height: 60px;
-                margin: 0 auto 1.5rem;
+            .floating-cards {
+                display: none;
             }
 
             .section {
@@ -1043,72 +715,21 @@
                 margin-bottom: 3rem;
             }
 
-            .problem-visual,
-            .experience-grid {
+            .features-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
 
-            .problem-card,
-            .experience-card {
+            .feature-card {
                 padding: 2rem 1.5rem;
-                text-align: center;
-            }
-
-            .problem-card .icon-wrapper,
-            .experience-card .icon-wrapper {
-                margin: 0 auto 1.5rem;
-            }
-
-            .beta-visual {
-                gap: 1.5rem;
-            }
-
-            .beta-card {
-                padding: 2rem 1.5rem;
-                text-align: center;
-            }
-
-            .beta-card .icon-wrapper {
-                margin: 0 auto 1.5rem;
-            }
-
-            .waitlist-form {
-                flex-direction: column;
-                padding: 1.5rem;
-                gap: 1rem;
-            }
-
-            .waitlist-input {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-            }
-
-            .waitlist-btn {
-                padding: 1rem;
-                font-size: 1rem;
-            }
-
-            .phone-mockup {
-                width: 240px;
-                height: 480px;
-            }
-
-            .floating-cards {
-                display: none;
-            }
-
-            .experience-section {
-                padding-top: 8rem;
-                padding-bottom: 8rem;
-            }
-
-            .experience-content {
-                padding: 0 1rem;
             }
         }
 
         @media (max-width: 480px) {
+            .nav-container {
+                padding: 12px 16px; /* FIXED PIXEL VALUES */
+            }
+
             .hero h1 {
                 font-size: 2.2rem;
             }
@@ -1121,33 +742,20 @@
                 font-size: 2rem;
             }
 
-            .section-subtitle {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 0.9rem 1.5rem;
-                font-size: 0.9rem;
-            }
-
             .phone-mockup {
                 width: 200px;
                 height: 400px;
             }
 
-            .feature-card,
-            .problem-card,
-            .experience-card,
-            .beta-card {
-                padding: 1.5rem 1rem;
-            }
-
-            .nav-container {
-                padding: 0.2rem 1rem;
+            .phone-screen {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
             }
 
             .logo {
-                font-size: 1.5rem;
+                font-size: 3rem; /* LARGER ON MOBILE TOO */
             }
         }
 
@@ -1162,28 +770,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        .scroll-animate-stagger {
-            transition-delay: var(--delay, 0s);
-        }
-
-        /* Smooth Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
     </style>
 </head>
 <body>
@@ -1196,8 +782,20 @@
                 <a href="#beta">Beta</a>
                 <a href="#waitlist">Join Waitlist</a>
             </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features" onclick="closeMobileMenu()">Features</a>
+        <a href="#beta" onclick="closeMobileMenu()">Beta</a>
+        <a href="#waitlist" onclick="closeMobileMenu()">Join Waitlist</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -1218,7 +816,7 @@
         <div class="hero-visual">
             <div class="phone-mockup">
                 <div class="phone-screen">
-                    <div class="app-preview"></div>
+                    <div class="app-preview">limelii</div>
                 </div>
             </div>
             <div class="floating-cards">
@@ -1236,64 +834,14 @@
         </div>
     </section>
 
-    <!-- Problem Section -->
-    <section class="problem-section section">
-        <div class="section-container">
-            <div class="problem-grid">
-                <div class="problem-content">
-                    <h2 class="scroll-animate">Experience planning shouldn't feel like work</h2>
-                    <p class="section-subtitle scroll-animate">We're solving the frustrations that turn discovery into a chore instead of excitement.</p>
-                    <div class="scroll-animate">
-                        <a href="#features" class="btn btn-primary">
-                            <div class="icon icon-sparkle" style="color: white;"></div>
-                            See Our Solution
-                        </a>
-                    </div>
-                </div>
-                <div class="problem-visual">
-                    <div class="problem-card scroll-animate" style="--delay: 0.1s;">
-                        <div class="icon-wrapper">
-                            <div class="icon icon-cross"></div>
-                        </div>
-                        <h3>Generic Recommendations</h3>
-                        <p>Cookie-cutter suggestions that miss your unique interests</p>
-                    </div>
-                    <div class="problem-card scroll-animate" style="--delay: 0.2s;">
-                        <div class="icon-wrapper">
-                            <div class="icon icon-search"></div>
-                        </div>
-                        <h3>Endless Research</h3>
-                        <p>Hours of browsing with no clear direction</p>
-                    </div>
-                    <div class="problem-card scroll-animate" style="--delay: 0.3s;">
-                        <div class="icon-wrapper">
-                            <div class="icon icon-question"></div>
-                        </div>
-                        <h3>No Personal Touch</h3>
-                        <p>Missing that human connection and understanding</p>
-                    </div>
-                    <div class="problem-card scroll-animate" style="--delay: 0.4s;">
-                        <div class="icon-wrapper">
-                            <div class="icon icon-grid"></div>
-                        </div>
-                        <h3>Fragmented Tools</h3>
-                        <p>Juggling multiple apps for one simple plan</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Features Section -->
     <section class="features-section section" id="features">
         <div class="section-container">
-            <div style="text-align: center;">
-                <h2 class="scroll-animate">Meet limelii</h2>
-                <p class="section-subtitle scroll-animate">The app that transforms how you discover and plan experiences</p>
-            </div>
+            <h2 class="scroll-animate">Meet limelii</h2>
+            <p class="section-subtitle scroll-animate">The app that transforms how you discover and plan experiences</p>
             
-            <div class="features-bento">
-                <div class="feature-card large scroll-animate">
+            <div class="features-grid">
+                <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <div class="icon icon-target"></div>
                     </div>
@@ -1307,14 +855,14 @@
                     <h3>Expert Curated</h3>
                     <p>Access adventures crafted by local experts and community enthusiasts.</p>
                 </div>
-                <div class="feature-card tall scroll-animate">
+                <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <div class="icon icon-mobile"></div>
                     </div>
                     <h3>End-to-End Planning</h3>
                     <p>From discovery to booking to sharing memories – everything you need in one beautifully simple app.</p>
                 </div>
-                <div class="feature-card wide scroll-animate">
+                <div class="feature-card scroll-animate">
                     <div class="feature-icon">
                         <div class="icon icon-community"></div>
                     </div>
@@ -1325,130 +873,14 @@
         </div>
     </section>
 
-    <!-- Experience Types - Curvy Section -->
-    <section class="experience-section">
-        <div class="experience-content">
-            <div style="text-align: center;">
-                <h2 class="scroll-animate" style="color: white;">What you'll find on limelii</h2>
-                <p class="section-subtitle scroll-animate" style="color: rgba(255,255,255,0.8);">Curated experiences for every mood and moment</p>
-            </div>
-            <div class="experience-grid">
-                <div class="experience-card scroll-animate">
-                    <div class="icon-wrapper">
-                        <div class="icon icon-food"></div>
-                    </div>
-                    <h3>Date Nights</h3>
-                    <p>Romantic restaurants, unique activities, memorable evenings</p>
-                </div>
-                <div class="experience-card scroll-animate">
-                    <div class="icon-wrapper">
-                        <div class="icon icon-nature"></div>
-                    </div>
-                    <h3>Weekend Getaways</h3>
-                    <p>Perfect escapes within driving distance</p>
-                </div>
-                <div class="experience-card scroll-animate">
-                    <div class="icon-wrapper">
-                        <div class="icon icon-wellness"></div>
-                    </div>
-                    <h3>Wellness Escapes</h3>
-                    <p>Spas, retreats, and rejuvenating experiences</p>
-                </div>
-                <div class="experience-card scroll-animate">
-                    <div class="icon-wrapper">
-                        <div class="icon icon-art"></div>
-                    </div>
-                    <h3>Local Adventures</h3>
-                    <p>Hidden gems, cultural experiences, and local favorites</p>
-                </div>
-                <div class="experience-card scroll-animate">
-                    <div class="icon-wrapper">
-                        <div class="icon icon-sun"></div>
-                    </div>
-                    <h3>Outdoor Activities</h3>
-                    <p>Hiking, beaches, parks, and nature experiences</p>
-                </div>
-                <div class="experience-card scroll-animate">
-                    <div class="icon-wrapper">
-                        <div class="icon icon-entertainment"></div>
-                    </div>
-                    <h3>Entertainment</h3>
-                    <p>Shows, events, and nightlife recommendations</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Beta Section -->
-    <section class="beta-section section" id="beta">
-        <div class="section-container">
-            <div class="beta-grid">
-                <div class="beta-content">
-                    <h2 class="scroll-animate">Be among the first</h2>
-                    <p class="section-subtitle scroll-animate" style="color: rgba(255,255,255,0.9);">Help us perfect limelii while getting exclusive early access and lifetime perks.</p>
-                    <div class="scroll-animate">
-                        <a href="#" class="btn btn-secondary" style="background: white; color: var(--primary);" onclick="showBetaForm()">
-                            <div class="icon icon-rocket" style="color: var(--primary);"></div>
-                            Join Beta Program
-                        </a>
-                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8); font-weight: 500;">Limited spots available</p>
-                    </div>
-                </div>
-                <div class="beta-visual">
-                    <div class="beta-card scroll-animate">
-                        <div class="icon-wrapper">
-                            <div class="icon icon-rocket"></div>
-                        </div>
-                        <h3>Early Access</h3>
-                        <p>Be first to try limelii before public launch and help shape the future</p>
-                    </div>
-                    <div class="beta-card scroll-animate">
-                        <div class="icon-wrapper">
-                            <div class="icon icon-lightbulb"></div>
-                        </div>
-                        <h3>Direct Impact</h3>
-                        <p>Your feedback will guide our features and development priorities</p>
-                    </div>
-                    <div class="beta-card scroll-animate">
-                        <div class="icon-wrapper">
-                            <div class="icon icon-gift"></div>
-                        </div>
-                        <h3>Lifetime Perks</h3>
-                        <p>Premium access forever and exclusive founding member status</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Waitlist Section -->
-    <section class="waitlist-section section" id="waitlist">
-        <div class="section-container">
-            <div class="waitlist-container">
-                <h2 class="scroll-animate">Stay in the loop</h2>
-                <p class="section-subtitle scroll-animate">Be the first to know when limelii launches and get exclusive updates along the way.</p>
-                
-                <form class="waitlist-form scroll-animate" onsubmit="handleWaitlistSubmit(event)">
-                    <input type="email" class="waitlist-input" placeholder="Enter your email address" required>
-                    <button type="submit" class="waitlist-btn">Join Waitlist</button>
-                </form>
-                
-                <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;" class="scroll-animate">No spam, just progress updates and launch notifications</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="social-links">
-                <a href="#" title="Instagram">📸</a>
-                <a href="#" title="Twitter">🐦</a>
-                <a href="#" title="LinkedIn">💼</a>
-                <a href="#" title="Newsletter">📧</a>
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">limelii</h3>
+                <p style="opacity: 0.7;">Where Every Experience Begins</p>
             </div>
             <p>&copy; 2025 limelii. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; opacity: 0.7;">limelii – Where Every Experience Begins</p>
         </div>
     </footer>
 
@@ -1467,7 +899,7 @@
             });
         });
 
-        // Advanced scroll animation with stagger
+        // Scroll animation observer
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -80px 0px'
@@ -1481,22 +913,33 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.scroll-animate').forEach((el, index) => {
+        document.querySelectorAll('.scroll-animate').forEach((el) => {
             observer.observe(el);
-            if (el.classList.contains('scroll-animate-stagger')) {
-                el.style.setProperty('--delay', `${index * 0.1}s`);
-            }
         });
 
-        // Enhanced navigation background on scroll with color change
+        // Mobile menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Navigation background on scroll
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('.nav');
             if (window.scrollY > 100) {
                 nav.classList.add('scrolled');
-                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
             } else {
                 nav.classList.remove('scrolled');
-                nav.style.boxShadow = 'none';
             }
         });
 
@@ -1518,79 +961,7 @@
             });
         });
 
-        // Waitlist form submission with animation
-        function handleWaitlistSubmit(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input[type="email"]').value;
-            const form = event.target;
-            
-            // Add loading state
-            const btn = form.querySelector('.waitlist-btn');
-            const originalText = btn.textContent;
-            btn.textContent = 'Joining...';
-            btn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                // Success animation
-                btn.textContent = '✓ Joined!';
-                btn.style.background = '#22c55e';
-                
-                setTimeout(() => {
-                    alert('Thank you for joining our waitlist! We\'ll notify you when limelii launches.');
-                    form.reset();
-                    btn.textContent = originalText;
-                    btn.style.background = '';
-                    btn.disabled = false;
-                }, 1500);
-            }, 1000);
-            
-            console.log('Waitlist signup:', email);
-        }
-
-        // Beta form function
-        function showBetaForm() {
-            // Add shake animation to button
-            const btn = event.target;
-            btn.style.animation = 'shake 0.5s ease-in-out';
-            
-            setTimeout(() => {
-                alert('Beta program coming soon! Join our waitlist to be notified when beta opens.');
-                btn.style.animation = '';
-            }, 500);
-        }
-
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Enhanced hover effects
-        document.querySelectorAll('.feature-card, .beta-card, .problem-card, .experience-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-            });
-        });
-
-        // Phone mockup interaction
-        const phoneMockup = document.querySelector('.phone-mockup');
-        if (phoneMockup) {
-            phoneMockup.addEventListener('mouseenter', () => {
-                phoneMockup.style.transform = 'rotate(-2deg) scale(1.05)';
-            });
-            
-            phoneMockup.addEventListener('mouseleave', () => {
-                phoneMockup.style.transform = 'rotate(-5deg) scale(1)';
-            });
-        }
-
-        // Initialize all animations on load
+        // Initialize animations on load
         window.addEventListener('load', () => {
             document.body.style.opacity = '1';
             document.body.style.transition = 'opacity 0.3s ease';
