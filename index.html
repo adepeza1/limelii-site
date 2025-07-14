@@ -1659,34 +1659,70 @@
         });
 
         // Waitlist form submission with animation
-        function handleWaitlistSubmit(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input[type="email"]').value;
-            const form = event.target;
+async function handleWaitlistSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const email = form.querySelector('input[type="email"]').value;
+    const btn = form.querySelector('.waitlist-btn');
+    const originalText = btn.textContent;
+    
+    // Validate email
+    if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    // Add loading state
+    btn.textContent = 'Joining...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    
+    try {
+        const response = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Success animation
+            btn.textContent = '✓ Joined!';
+            btn.style.background = '#22c55e';
+            btn.style.opacity = '1';
             
-            // Add loading state
-            const btn = form.querySelector('.waitlist-btn');
-            const originalText = btn.textContent;
-            btn.textContent = 'Joining...';
-            btn.disabled = true;
-            
-            // Simulate API call
+            // Show success message
             setTimeout(() => {
-                // Success animation
-                btn.textContent = '✓ Joined!';
-                btn.style.background = '#22c55e';
-                
-                setTimeout(() => {
-                    alert('Thank you for joining our waitlist! We\'ll notify you when limelii launches.');
-                    form.reset();
-                    btn.textContent = originalText;
-                    btn.style.background = '';
-                    btn.disabled = false;
-                }, 1500);
-            }, 1000);
-            
-            console.log('Waitlist signup:', email);
+                alert('🎉 Thank you for joining our waitlist!\n\nCheck your email for confirmation. You\'ll be among the first to know when Limelii launches!');
+                form.reset();
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 1500);
+        } else {
+            throw new Error(data.error || 'Failed to join waitlist');
         }
+    } catch (error) {
+        console.error('Waitlist error:', error);
+        
+        // Error state
+        btn.textContent = 'Try Again';
+        btn.style.background = '#ef4444';
+        btn.style.opacity = '1';
+        btn.disabled = false;
+        
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 3000);
+        
+        alert('Oops! Something went wrong. Please check your internet connection and try again.');
+    }
+}
 
         // Beta form function
         function showBetaForm() {
