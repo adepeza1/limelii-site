@@ -1,4 +1,4 @@
-// Fresh API file for debugging
+// api/waitlist.js - ES Module format
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -31,10 +31,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Simple test - just log and return success
     console.log(`New waitlist signup: ${email}`);
     
-    // TODO: Add email sending back after we confirm API works
     res.status(200).json({ 
       success: true, 
       message: 'API is working! Email functionality will be added back shortly.' 
