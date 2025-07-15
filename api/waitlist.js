@@ -28,9 +28,9 @@ export default async function handler(req, res) {
   try {
     // Send notification to you (the owner)
     await resend.emails.send({
-      from: 'onboarding@resend.dev', // Default from address for free accounts
-      to: process.env.OWNER_EMAIL || 'your-email@gmail.com', // Replace with your email
-      subject: '🎉 New Limelii Waitlist Signup!',
+      from: 'waitlist@limelii.com', // Default from address for free accounts
+      to: process.env.OWNER_EMAIL, // Replace with your email
+      subject: '🎉 New limelii Waitlist Signup!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #E85A7B;">New Waitlist Signup! 🎉</h2>
