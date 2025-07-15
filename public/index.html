@@ -121,8 +121,9 @@
             padding: 8px 32px; /* FIXED PIXEL VALUES - won't grow with font size */
             height: 80px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* MOVED LOGO TO LEFT */
             align-items: center;
+            padding-left: 8px; /* MOVED EVEN FURTHER LEFT */
         }
 
         .logo {
@@ -133,6 +134,7 @@
             letter-spacing: -0.02em;
             transition: all 0.3s ease;
             line-height: 1; /* Prevents vertical expansion */
+            margin-right: auto; /* PUSHES NAV LINKS TO RIGHT */
         }
         
         .logo-img {
@@ -264,15 +266,15 @@
             color: var(--primary);
         }
 
-        /* Hero Section - FIXED MOBILE BACKGROUND */
+        /* Hero Section - SHARPENED BACKGROUND IMAGE */
         .hero {
             min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
             gap: 4rem;
-            padding: 2rem;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
+            padding: 0 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.25)), 
                         url('floatingPark2.png');
             background-size: cover;
             background-position: center;
@@ -280,6 +282,10 @@
             position: relative;
             overflow: hidden;
             color: white;
+            /* SHARPENED IMAGE */
+            filter: contrast(1.1) brightness(1.05);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
 
         .hero::before {
@@ -435,19 +441,22 @@
             50% { transform: translateY(-15px); }
         }
 
+        /* HERO TITLE - UNBOLD */
         .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 100;
+            font-size: 4.2rem;
+            font-weight: 300; /* CHANGED FROM 700 TO UNBOLD */
             margin-bottom: 1.5rem;
             color: white;
             letter-spacing: -0.04em;
             line-height: 1.1;
             animation: slideInLeft 1s ease-out;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            white-space: nowrap; /* Keeps it on one line */
         }
 
+        /* BETTER SUBTITLE */
         .hero .subtitle {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 3rem;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 300;
@@ -532,9 +541,9 @@
             }
         }
 
-        /* Sections */
+        /* FIXED SPACING - Sections */
         .section {
-            padding: 8rem 2rem;
+            padding: 6rem 2rem; /* REDUCED FROM 8rem to fix spacing */
             position: relative;
         }
 
@@ -552,12 +561,15 @@
             line-height: 1.1;
         }
 
+        /* FIXED SUBTITLE SPACING */
         .section-subtitle {
             font-size: 1.3rem;
             color: var(--gray-500);
-            margin-bottom: 5rem;
+            margin-bottom: 2rem; /* REDUCED FROM 4rem FOR LESS SPACING */
             max-width: 700px;
             line-height: 1.6;
+            margin-left: auto;
+            margin-right: auto; /* CENTER ALIGNED */
         }
 
         /* Problem Section */
@@ -641,43 +653,52 @@
             line-height: 1.7;
         }
 
-        /* Features Section */
+        /* FEATURES SECTION - MATCHING BETA SECTION LAYOUT */
         .features-section {
             background: white;
+            padding-top: 4rem !important;
         }
 
-        .features-bento {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 200px);
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .features-content {
+            text-align: left;
+        }
+
+        .features-content h2 {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .features-visual {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
-            margin-top: 5rem;
         }
 
         .feature-card {
             background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
             border-radius: 24px;
             border: 1px solid var(--gray-200);
-            padding: 2.5rem;
+            padding: 2.5rem 2rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
-        .feature-card.large {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .feature-card.tall {
-            grid-row: span 2;
-        }
-
-        .feature-card.wide {
-            grid-column: span 2;
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
         }
 
         .feature-card::before {
@@ -703,28 +724,30 @@
         }
 
         .feature-icon {
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             background: rgba(232, 90, 123, 0.1);
-            border-radius: 20px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin: 0 auto 1.5rem;
             color: var(--primary);
+            flex-shrink: 0;
         }
 
         .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
             color: var(--dark);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .feature-card p {
             color: var(--gray-500);
-            line-height: 1.7;
+            line-height: 1.6;
             font-size: 1rem;
+            opacity: 0.9;
         }
 
         /* Experience Section */
@@ -735,13 +758,13 @@
             max-width: 100%;
             position: relative;
             transform: skewY(-3deg);
-            margin-top: 8rem;
-            margin-bottom: 8rem;
+            margin-top: 6rem; /* REDUCED FROM 8rem */
+            margin-bottom: 6rem; /* REDUCED FROM 8rem */
         }
 
         .diagonal-content {
             transform: skewY(3deg);
-            padding: 8rem 2rem;
+            padding: 6rem 2rem; /* REDUCED FROM 8rem */
         }
 
         .experience-section::before {
@@ -778,7 +801,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 5rem;
+            margin-top: 4rem; /* REDUCED FROM 5rem */
         }
 
         .experience-card {
@@ -985,6 +1008,43 @@
             transform: translateY(-3px);
         }
 
+        /* Social Media Icons */
+        .social-links a[title="Instagram"]::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .social-links a[title="Twitter"]::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153ZM17.61 20.644h2.039L6.486 3.24H4.298L17.61 20.644Z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .social-links a[title="TikTok"]::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .social-links a[title="Email"]::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='m4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
         /* Mobile Styles */
         @media (max-width: 1024px) {
             .hero {
@@ -1000,8 +1060,9 @@
             }
 
             .hero h1 {
-                font-size: 3.5rem;
+                font-size: 3.2rem;
                 line-height: 1.1;
+                white-space: normal; /* Allow wrapping on tablet */
             }
 
             .hero .subtitle {
@@ -1021,20 +1082,35 @@
                 text-align: center;
             }
 
-            .features-bento {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(4, 180px);
-                gap: 1.5rem;
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
             }
 
-            .feature-card.large {
-                grid-column: span 2;
-                grid-row: span 1;
-                padding: 2rem 1.5rem;
+            .features-content h2 {
+                text-align: center;
+            }
+
+            .features-content .section-subtitle {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            .features-visual {
+                gap: 1.5rem;
             }
 
             .feature-card {
                 padding: 2rem 1.5rem;
+                text-align: center;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                margin: 0 auto 1.5rem;
             }
 
             .phone-mockup {
@@ -1049,7 +1125,7 @@
             }
 
             .section {
-                padding: 6rem 1.5rem;
+                padding: 5rem 1.5rem; /* REDUCED */
             }
 
             .section h2 {
@@ -1059,8 +1135,13 @@
 
         @media (max-width: 768px) {
             .nav-container {
-                padding: 8px 24px; /* FIXED PIXEL VALUES for mobile */
-                height: 70px;
+                padding: 16px 8px; /* KEEP LOGO EVEN FURTHER LEFT ON MOBILE */
+                height: 80px; /* INCREASED HEIGHT FOR MOBILE LOGO */
+                justify-content: space-between; /* RESET TO SPACE BETWEEN ON MOBILE */
+            }
+
+            .logo {
+                margin-right: 0; /* RESET MARGIN ON MOBILE */
             }
 
             .nav-links {
@@ -1077,11 +1158,15 @@
                 gap: 3rem;
                 padding: 6rem 1rem 3rem;
                 /* FIXED - Ensuring background shows on mobile */
-                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
+                background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
                             url('floatingPark2.png');
                 background-size: cover;
                 background-position: center;
                 background-attachment: scroll;
+                /* SHARPENED FOR MOBILE TOO */
+                filter: contrast(1.1) brightness(1.05);
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
             }
 
             .hero-content {
@@ -1089,10 +1174,14 @@
                 max-width: 100%;
             }
 
+            /* MOBILE HERO TITLE - ONE LINE */
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.4rem;
                 margin-bottom: 1rem;
                 line-height: 1.1;
+                white-space: nowrap; /* KEEPS ON ONE LINE ON MOBILE */
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .hero .subtitle {
@@ -1115,17 +1204,24 @@
                 justify-content: center;
             }
 
-            .features-bento {
+            .features-grid {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                gap: 1.5rem;
+                gap: 4rem;
+                text-align: center;
             }
 
-            .feature-card.large,
-            .feature-card.tall,
-            .feature-card.wide {
-                grid-column: span 1;
-                grid-row: span 1;
+            .features-content h2 {
+                text-align: center;
+            }
+
+            .features-content .section-subtitle {
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            .features-visual {
+                gap: 1.5rem;
             }
 
             .feature-card {
@@ -1134,8 +1230,8 @@
             }
 
             .feature-icon {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
                 margin: 0 auto 1.5rem;
             }
 
@@ -1223,8 +1319,8 @@
             }
 
             .experience-section {
-                padding-top: 8rem;
-                padding-bottom: 8rem;
+                padding-top: 6rem; /* REDUCED */
+                padding-bottom: 6rem; /* REDUCED */
             }
 
             .experience-content {
@@ -1248,8 +1344,12 @@
                 font-size: 2rem; /* LARGER ON MOBILE TOO - CHANGE THIS FOR MOBILE SIZE */
             }
 
+            /* SMALL MOBILE HERO TITLE - EVEN SMALLER */
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .hero .subtitle {
@@ -1354,8 +1454,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h2><b>New Plans Just Dropped</b></h2>
-            <p class="subtitle">Discover curated experiences and connect with a community of adventurers in the city that never sleeps.</p>
+            <h1>New Plans Just Dropped</h1>
+            <p class="subtitle">Unlock hidden gems and unforgettable moments curated by NYC locals. From secret speakeasies to rooftop views – your perfect adventure awaits.</p>
             <div class="cta-buttons">
                 <a href="#beta" class="btn btn-primary">
                     <div class="icon icon-rocket" style="color: white;"></div>
@@ -1391,39 +1491,40 @@
     <!-- Features Section -->
     <section class="features-section section" id="features">
         <div class="section-container">
-            <div style="text-align: center;">
-                <h2 class="scroll-animate">Meet <img src="logo.png" alt="limelii" style="height: 3em; vertical-align: middle; transform: translateY(-0.1em);"></h2>
-                <p class="section-subtitle scroll-animate">Experience planning shouldn't feel like work</p>
-            </div>
-            
-            <div class="features-bento">
-                <div class="feature-card large scroll-animate">
-                    <div class="feature-icon">
-                        <div class="icon icon-target"></div>
-                    </div>
-                    <h3>Personalized Just for You</h3>
-                    <p>Get recommendations tailored to your interests, location, and preferences. No more sifting through irrelevant suggestions.</p>
+            <div class="features-grid">
+                <div class="features-content">
+                    <h2 class="scroll-animate">Meet <img src="logo.png" alt="limelii" style="height: 3em; vertical-align: middle; transform: translateY(-0.1em);"></h2>
+                    <p class="section-subtitle scroll-animate" style="color: var(--gray-500); text-align: left; margin-left: 0; margin-right: 0;">Experience planning shouldn't feel like work.</p>
                 </div>
-                <div class="feature-card scroll-animate">
-                    <div class="feature-icon">
-                        <div class="icon icon-sparkle"></div>
+                <div class="features-visual">
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <div class="icon icon-target"></div>
+                        </div>
+                        <h3>Personalized Just for You</h3>
+                        <p>Get recommendations tailored to your interests, location, and preferences. No more sifting through irrelevant suggestions.</p>
                     </div>
-                    <h3>Expert Curated</h3>
-                    <p>Access adventures crafted by local experts and community enthusiasts.</p>
-                </div>
-                <div class="feature-card tall scroll-animate">
-                    <div class="feature-icon">
-                        <div class="icon icon-mobile"></div>
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <div class="icon icon-sparkle"></div>
+                        </div>
+                        <h3>Expert Curated</h3>
+                        <p>Access adventures crafted by local experts and community enthusiasts.</p>
                     </div>
-                    <h3>End-to-End Planning</h3>
-                    <p>From discovery to booking to sharing memories – everything you need in one beautifully simple app.</p>
-                </div>
-                <div class="feature-card wide scroll-animate">
-                    <div class="feature-icon">
-                        <div class="icon icon-community"></div>
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <div class="icon icon-mobile"></div>
+                        </div>
+                        <h3>End-to-End Planning</h3>
+                        <p>From discovery to booking to sharing memories – everything you need in one beautifully simple app.</p>
                     </div>
-                    <h3>Vibrant Community</h3>
-                    <p>Connect with like-minded adventurers, share discoveries, and get inspired by others' unique experiences.</p>
+                    <div class="feature-card scroll-animate">
+                        <div class="feature-icon">
+                            <div class="icon icon-community"></div>
+                        </div>
+                        <h3>Vibrant Community</h3>
+                        <p>Connect with like-minded adventurers, share discoveries, and get inspired by others' unique experiences.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1433,8 +1534,8 @@
     <section class="diagonal-section">
         <div class="diagonal-content">
             <div style="text-align: center;">
-                <h1 class="scroll-animate" style="color: white;"><b>What you'll find on limelii</b></h1>
-                <p class="section-subtitle scroll-animate" style="color: rgba(255,255,255,0.8);">Curated experiences for every mood and moment</p>
+                <h1 class="scroll-animate" style="color: white;"><b>What You'll Find on <img src="logo.png" alt="limelii" style="height: 1.5em; vertical-align: middle; transform: translateY(-0.1em);"></b></h1>
+                <p class="section-subtitle scroll-animate" style="color: rgba(255,255,255,0.8);">Curated experiences for every mood and moment.</p>
             </div>
             <div class="experience-grid">
                 <div class="experience-card scroll-animate">
@@ -1442,42 +1543,42 @@
                         <div class="icon icon-food"></div>
                     </div>
                     <h3>Date Nights</h3>
-                    <p>Romantic restaurants, unique activities, memorable evenings</p>
+                    <p>Romantic restaurants, unique activities, and memorable evenings.</p>
                 </div>
                 <div class="experience-card scroll-animate">
                     <div class="icon-wrapper">
                         <div class="icon icon-nature"></div>
                     </div>
                     <h3>Weekend Getaways</h3>
-                    <p>Perfect escapes within driving distance</p>
+                    <p>Perfect escapes within driving distance.</p>
                 </div>
                 <div class="experience-card scroll-animate">
                     <div class="icon-wrapper">
                         <div class="icon icon-wellness"></div>
                     </div>
                     <h3>Wellness Escapes</h3>
-                    <p>Spas, retreats, and rejuvenating experiences</p>
+                    <p>Spas, retreats, and rejuvenating experiences.</p>
                 </div>
                 <div class="experience-card scroll-animate">
                     <div class="icon-wrapper">
                         <div class="icon icon-art"></div>
                     </div>
                     <h3>Local Adventures</h3>
-                    <p>Hidden gems, cultural experiences, and local favorites</p>
+                    <p>Hidden gems, cultural experiences, and local favorites.</p>
                 </div>
                 <div class="experience-card scroll-animate">
                     <div class="icon-wrapper">
                         <div class="icon icon-sun"></div>
                     </div>
                     <h3>Outdoor Activities</h3>
-                    <p>Hiking, beaches, parks, and nature experiences</p>
+                    <p>Hiking, beaches, parks, and nature experiences.</p>
                 </div>
                 <div class="experience-card scroll-animate">
                     <div class="icon-wrapper">
                         <div class="icon icon-entertainment"></div>
                     </div>
                     <h3>Entertainment</h3>
-                    <p>Shows, events, and nightlife recommendations</p>
+                    <p>Shows, events, and nightlife recommendations.</p>
                 </div>
             </div>
         </div>
@@ -1488,14 +1589,14 @@
         <div class="section-container">
             <div class="beta-grid">
                 <div class="beta-content">
-                    <h2 class="scroll-animate">Be among the first</h2>
+                    <h2 class="scroll-animate">Be Among the First</h2>
                     <p class="section-subtitle scroll-animate" style="color: rgba(255,255,255,0.9);">Help us perfect limelii while getting exclusive early access and lifetime perks.</p>
                     <div class="scroll-animate">
                         <a href="#" class="btn btn-secondary" style="background: white; color: var(--primary);" onclick="showBetaForm()">
                             <div class="icon icon-rocket" style="color: var(--primary);"></div>
                             Join Beta Program
                         </a>
-                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8); font-weight: 500;">Limited spots available</p>
+                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8); font-weight: 500;">Limited spots available.</p>
                     </div>
                 </div>
                 <div class="beta-visual">
@@ -1504,21 +1605,21 @@
                             <div class="icon icon-rocket"></div>
                         </div>
                         <h3>Early Access</h3>
-                        <p>Be first to try limelii before public launch and help shape the future</p>
+                        <p>Be first to try limelii before public launch and help shape the future.</p>
                     </div>
                     <div class="beta-card scroll-animate">
                         <div class="icon-wrapper">
                             <div class="icon icon-lightbulb"></div>
                         </div>
                         <h3>Direct Impact</h3>
-                        <p>Your feedback will guide our features and development priorities</p>
+                        <p>Your feedback will guide our features and development priorities.</p>
                     </div>
                     <div class="beta-card scroll-animate">
                         <div class="icon-wrapper">
                             <div class="icon icon-gift"></div>
                         </div>
                         <h3>Lifetime Perks</h3>
-                        <p>Premium access forever and exclusive founding member status</p>
+                        <p>Premium access forever and exclusive founding member status.</p>
                     </div>
                 </div>
             </div>
@@ -1529,7 +1630,7 @@
     <section class="waitlist-section section" id="waitlist">
         <div class="section-container">
             <div class="waitlist-container">
-                <h2 class="scroll-animate">Stay in the loop</h2>
+                <h2 class="scroll-animate">Stay in the Loop</h2>
                 <p class="section-subtitle scroll-animate">Be the first to know when limelii launches and get exclusive updates along the way.</p>
                 
                 <form class="waitlist-form scroll-animate" onsubmit="handleWaitlistSubmit(event)">
@@ -1537,7 +1638,7 @@
                     <button type="submit" class="waitlist-btn">Join Waitlist</button>
                 </form>
                 
-                <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;" class="scroll-animate">No spam, just progress updates and launch notifications</p>
+                <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;" class="scroll-animate">No spam, just progress updates and launch notifications.</p>
             </div>
         </div>
     </section>
@@ -1546,10 +1647,10 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" title="Instagram">📸</a>
-                <a href="#" title="Twitter">🐦</a>
-                <a href="#" title="LinkedIn">💼</a>
-                <a href="#" title="Newsletter">📧</a>
+                <a href="#" title="Instagram"></a>
+                <a href="#" title="Twitter"></a>
+                <a href="#" title="TikTok"></a>
+                <a href="#" title="Email"></a>
             </div>
             <p>&copy; 2025 limelii. All rights reserved.</p>
             <p style="margin-top: 0.5rem; opacity: 0.7;">limelii – Where Every Experience Begins</p>
