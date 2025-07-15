@@ -1,6 +1,7 @@
 {
   "name": "limelii-website",
   "version": "1.0.0",
+  "type": "module",
   "description": "Limelii - Where Experiences Begin",
   "main": "public/index.html",
   "scripts": {
