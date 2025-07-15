@@ -39,7 +39,7 @@ export default async function handler(req, res) {
             <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
             <p><strong>Time:</strong> ${new Date().toISOString()}</p>
           </div>
-          <p style="color: #666;">This email was sent from your Limelii waitlist form.</p>
+          <p style="color: #666;">This email was sent from your limelii waitlist form.</p>
         </div>
       `
     });
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
     await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: email,
-      subject: 'Welcome to Limelii! 🌟',
+      subject: 'Welcome to limelii! 🌟',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="text-align: center; padding: 40px 20px;">
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
             </div>
             
             <p style="color: #E85A7B; font-weight: 500;">
-              Best,<br>The Limelii Team
+              Best,<br>The limelii Team
             </p>
           </div>
         </div>
