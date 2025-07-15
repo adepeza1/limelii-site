@@ -131,6 +131,16 @@
             transition: all 0.3s ease;
             line-height: 1; /* Prevents vertical expansion */
         }
+        
+        .logo-img {
+        height: 60px;
+        width: auto;
+        transition: all 0.3s ease;
+        }
+        
+        .logo-img:hover {
+        transform: scale(1.05);
+        }
 
         .nav-links {
             display: flex;
@@ -1211,9 +1221,15 @@
             .experience-content {
                 padding: 0 1rem;
             }
+            .logo-img {
+                height: 50px;
+            }
         }
 
         @media (max-width: 480px) {
+            .logo-img {
+                height: 45px;
+            }
             .nav-container {
                 padding: 12px 16px; /* FIXED PIXEL VALUES for small mobile */
             }
@@ -1303,7 +1319,7 @@
     <nav class="nav" id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-            <img src="logo.png" alt="limelii" style="height: 200px; width: auto;">    
+            <img src="logo.png" alt="limelii" style="height: 80px; width: auto;" class="logo-img">    
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
