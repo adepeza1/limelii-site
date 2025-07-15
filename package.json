@@ -2,10 +2,10 @@
   "name": "limelii-website",
   "version": "1.0.0",
   "description": "Limelii - Where Experiences Begin",
-  "main": "index.html",
+  "main": "public/index.html",
   "scripts": {
     "dev": "vercel dev",
-    "build": "echo 'No build needed for static site'"
+    "build": "echo 'Static site - no build needed'"
   },
   "dependencies": {
     "resend": "^3.2.0"
