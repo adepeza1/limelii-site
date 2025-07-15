@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>limelii - Where Experiences Begin</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #0a0a0a;
+            overflow-x: hidden;
+            background: #ffffff;
+            font-weight: 300;
+        }
+
+        /* Brand Colors */
+        :root {
+            --primary: #E85A7B;
+            --primary-light: #f0859e;
+            --primary-dark: #d63d61;
+            --accent: #6366f1;
+            --accent-light: #a5b4fc;
+            --dark: #0a0a0a;
+            --dark-secondary: #1a1a1a;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+        }
+
+        /* Better Font Weights */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 200;
+        }
+
+        .hero h1 {
+            font-weight: 100;
+        }
+
+        .btn {
+            font-weight: 400;
+        }
+
+        .nav-links a {
+            font-weight: 300;
+        }
+
+        /* Font Awesome Icons */
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .icon-target::before { content: '\f140'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-sparkle::before { content: '\f005'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-mobile::before { content: '\f3cd'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-community::before { content: '\f0c0'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-cross::before { content: '\f00d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-search::before { content: '\f002'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-question::before { content: '\f059'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-grid::before { content: '\f009'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-food::before { content: '\f2e7'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-nature::before { content: '\f6fc'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-wellness::before { content: '\f004'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-art::before { content: '\f1fc'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-sun::before { content: '\f185'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-entertainment::before { content: '\f04b'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-rocket::before { content: '\f135'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-lightbulb::before { content: '\f0eb'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+        .icon-gift::before { content: '\f06b'; font-family: 'Font Awesome 6 Free'; font-weight: 900; }
+
+        /* Navigation - FIXED PADDING */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 32px; /* FIXED PIXEL VALUES - won't grow with font size */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.4rem; /* INCREASED LOGO SIZE - CHANGE THIS NUMBER TO MAKE BIGGER */
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: all 0.3s ease;
+            line-height: 1; /* Prevents vertical expansion */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* Hamburger Menu - FIXED */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            gap: 4px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled .hamburger span {
+            background: var(--gray-700);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav.scrolled .nav-links a {
+            color: var(--gray-700);
+        }
+
+        .nav.scrolled .nav-links a::after {
+            background: var(--primary);
+        }
+
+        .nav.scrolled .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section - FIXED MOBILE BACKGROUND */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
+                        url('./floatingPark2.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(232, 90, 123, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            padding-left: 2rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Phone Mockup - THINNER BORDERS */
+        .phone-mockup {
+            width: 320px;
+            height: 640px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 50px;
+            position: relative;
+            box-shadow: 
+                0 0 0 3px rgba(255, 255, 255, 0.1),
+                0 0 0 6px rgba(255, 255, 255, 0.05),
+                0 30px 80px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1);
+            transform: rotate(-8deg) perspective(1000px) rotateY(15deg);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+            animation: phoneFloat 6s ease-in-out infinite;
+        }
+
+        .phone-mockup:hover {
+            transform: rotate(-3deg) perspective(1000px) rotateY(5deg) scale(1.02);
+            box-shadow: 
+                0 0 0 4px rgba(255, 255, 255, 0.15),
+                0 0 0 8px rgba(255, 255, 255, 0.08),
+                0 40px 100px rgba(0, 0, 0, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes phoneFloat {
+            0%, 100% { 
+                transform: rotate(-8deg) perspective(1000px) rotateY(15deg) translateY(0px);
+            }
+            50% { 
+                transform: rotate(-8deg) perspective(1000px) rotateY(15deg) translateY(-10px);
+            }
+        }
+
+        .phone-screen {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            background: #000;
+            border-radius: 35px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .app-preview {
+            width: 100%;
+            height: 100%;
+            background-image: url('./mockPhoto.PNG');
+            background-size: cover;
+            border-radius: 33px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .app-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(232, 90, 123, 0.1) 0%, 
+                transparent 50%,
+                rgba(99, 102, 241, 0.1) 100%);
+            border-radius: 33px;
+        }
+
+        /* Floating Cards */
+        .floating-cards {
+            position: absolute;
+            width: 140px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .floating-cards:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .floating-cards:nth-child(1) {
+            top: 15%;
+            right: 8%;
+            animation: floatUp 8s ease-in-out infinite;
+        }
+
+        .floating-cards:nth-child(2) {
+            bottom: 25%;
+            right: 15%;
+            animation: floatUp 8s ease-in-out infinite 2s;
+        }
+
+        .floating-cards:nth-child(3) {
+            top: 45%;
+            right: 2%;
+            animation: floatUp 8s ease-in-out infinite 4s;
+        }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 100;
+            margin-bottom: 1.5rem;
+            color: white;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            animation: slideInLeft 1s ease-out;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            line-height: 1.6;
+            animation: slideInLeft 1s ease-out 0.2s both;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: slideInLeft 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: 0 8px 30px rgba(232, 90, 123, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(232, 90, 123, 0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            border: 2px solid var(--gray-200);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray-500);
+            margin-bottom: 5rem;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: var(--gray-50);
+            margin: 0;
+            max-width: 100%;
+            position: relative;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .problem-content h2 {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .problem-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(232, 90, 123, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .problem-card:hover::before {
+            left: 100%;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .problem-card .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(232, 90, 123, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .problem-card p {
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+        }
+
+        .features-bento {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 200px);
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            border-radius: 24px;
+            border: 1px solid var(--gray-200);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .feature-card.tall {
+            grid-row: span 2;
+        }
+
+        .feature-card.wide {
+            grid-column: span 2;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+            border-color: var(--gray-300);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(232, 90, 123, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--gray-500);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Experience Section */
+        .diagonal-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
+            color: white;
+            margin: 0;
+            max-width: 100%;
+            position: relative;
+            transform: skewY(-3deg);
+            margin-top: 8rem;
+            margin-bottom: 8rem;
+        }
+
+        .diagonal-content {
+            transform: skewY(3deg);
+            padding: 8rem 2rem;
+        }
+
+        .experience-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
+            clip-path: ellipse(100% 100% at 50% 100%);
+        }
+
+        .experience-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
+            clip-path: ellipse(100% 100% at 50% 0%);
+        }
+
+        .experience-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .experience-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-8px);
+            border-color: rgba(232, 90, 123, 0.4);
+        }
+
+        .experience-card .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .experience-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .experience-card p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Beta Section */
+        .beta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            margin: 0;
+            max-width: 100%;
+            position: relative;
+        }
+
+        .beta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .beta-content h2 {
+            color: white;
+            text-align: left;
+        }
+
+        .beta-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .beta-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .beta-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .beta-card .icon-wrapper {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .beta-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .beta-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Waitlist Section */
+        .waitlist-section {
+            background: white;
+            text-align: center;
+        }
+
+        .waitlist-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .waitlist-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: 60px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .waitlist-form:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(232, 90, 123, 0.1);
+        }
+
+        .waitlist-input {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        .waitlist-input:focus {
+            outline: none;
+        }
+
+        .waitlist-input::placeholder {
+            color: var(--gray-500);
+        }
+
+        .waitlist-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .waitlist-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding: 8rem 1.5rem 4rem;
+            }
+
+            .hero-content {
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                line-height: 1.1;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .problem-grid,
+            .beta-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
+            }
+
+            .problem-content h2,
+            .beta-content h2 {
+                text-align: center;
+            }
+
+            .features-bento {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, 180px);
+                gap: 1.5rem;
+            }
+
+            .feature-card.large {
+                grid-column: span 2;
+                grid-row: span 1;
+                padding: 2rem 1.5rem;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .phone-mockup {
+                width: 280px;
+                height: 560px;
+            }
+
+            .floating-cards {
+                width: 100px;
+                height: 70px;
+                font-size: 0.7rem;
+            }
+
+            .section {
+                padding: 6rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 16px 24px; /* FIXED PIXEL VALUES for mobile */
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex; /* FIXED - Now shows on mobile */
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding: 6rem 1rem 3rem;
+                /* FIXED - Ensuring background shows on mobile */
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), 
+                            url('./floatingPark2.png');
+                background-size: cover;
+                background-position: center;
+                background-attachment: scroll;
+            }
+
+            .hero-content {
+                padding-left: 0;
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+                line-height: 1.1;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                line-height: 1.5;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                padding: 1rem 2rem;
+                font-size: 0.95rem;
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .features-bento {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 1.5rem;
+            }
+
+            .feature-card.large,
+            .feature-card.tall,
+            .feature-card.wide {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+                text-align: center;
+            }
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                margin: 0 auto 1.5rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.2;
+                text-align: center;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .problem-visual,
+            .experience-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .problem-card,
+            .experience-card {
+                padding: 2rem 1.5rem;
+                text-align: center;
+            }
+
+            .problem-card .icon-wrapper,
+            .experience-card .icon-wrapper {
+                margin: 0 auto 1.5rem;
+            }
+
+            .beta-visual {
+                gap: 1.5rem;
+            }
+
+            .beta-card {
+                padding: 2rem 1.5rem;
+                text-align: center;
+            }
+
+            .beta-card .icon-wrapper {
+                margin: 0 auto 1.5rem;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+
+            .waitlist-input {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .waitlist-btn {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            /* Better mobile phone mockup - THINNER BORDERS */
+            .phone-mockup {
+                width: 260px;
+                height: 520px;
+                margin: 0 auto;
+            }
+
+            .phone-screen {
+                top: 12px;
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+            }
+
+            .floating-cards {
+                display: none;
+            }
+
+            .experience-section {
+                padding-top: 8rem;
+                padding-bottom: 8rem;
+            }
+
+            .experience-content {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 12px 16px; /* FIXED PIXEL VALUES for small mobile */
+            }
+
+            .logo {
+                font-size: 2rem; /* LARGER ON MOBILE TOO - CHANGE THIS FOR MOBILE SIZE */
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .phone-mockup {
+                width: 200px;
+                height: 400px;
+            }
+
+            .phone-screen {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .feature-card,
+            .problem-card,
+            .experience-card,
+            .beta-card {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-animate.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-animate-stagger {
+            transition-delay: var(--delay, 0s);
+        }
+
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">limelii</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#beta">Beta</a>
+                <a href="#waitlist">Join Waitlist</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features" onclick="closeMobileMenu()">Features</a>
+        <a href="#beta" onclick="closeMobileMenu()">Beta</a>
+        <a href="#waitlist" onclick="closeMobileMenu()">Join Waitlist</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>New Plans Just Dropped</h1>
+            <p class="subtitle">Discover curated experiences and connect with a community of adventurers in the city that never sleeps.</p>
+            <div class="cta-buttons">
+                <a href="#beta" class="btn btn-primary">
+                    <div class="icon icon-rocket" style="color: white;"></div>
+                    Join Beta Program
+                </a>
+                <a href="#waitlist" class="btn btn-secondary">
+                    <div class="icon icon-community" style="color: var(--primary);"></div>
+                    Join Waitlist
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="app-preview"></div>
+                </div>
+            </div>
+            <div class="floating-cards">
+                <div class="icon icon-food" style="color: var(--primary); font-size: 1.5rem;"></div>
+                Date Night
+            </div>
+            <div class="floating-cards">
+                <div class="icon icon-nature" style="color: var(--primary); font-size: 1.5rem;"></div>
+                Adventure
+            </div>
+            <div class="floating-cards">
+                <div class="icon icon-art" style="color: var(--primary); font-size: 1.5rem;"></div>
+                Local Gems
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section section">
+        <div class="section-container">
+            <div class="problem-grid">
+                <div class="problem-content">
+                    <h2 class="scroll-animate">Experience planning shouldn't feel like work</h2>
+                    <p class="section-subtitle scroll-animate">We're solving the frustrations that turn discovery into a chore instead of excitement.</p>
+                    <div class="scroll-animate">
+                        <a href="#features" class="btn btn-primary">
+                            <div class="icon icon-sparkle" style="color: white;"></div>
+                            See Our Solution
+                        </a>
+                    </div>
+                </div>
+                <div class="problem-visual">
+                    <div class="problem-card scroll-animate" style="--delay: 0.1s;">
+                        <div class="icon-wrapper">
+                            <div class="icon icon-cross"></div>
+                        </div>
+                        <h3>Generic Recommendations</h3>
+                        <p>Cookie-cutter suggestions that miss your unique interests</p>
+                    </div>
+                    <div class="problem-card scroll-animate" style="--delay: 0.2s;">
+                        <div class="icon-wrapper">
+                            <div class="icon icon-search"></div>
+                        </div>
+                        <h3>Endless Research</h3>
+                        <p>Hours of browsing with no clear direction</p>
+                    </div>
+                    <div class="problem-card scroll-animate" style="--delay: 0.3s;">
+                        <div class="icon-wrapper">
+                            <div class="icon icon-question"></div>
+                        </div>
+                        <h3>No Personal Touch</h3>
+                        <p>Missing that human connection and understanding</p>
+                    </div>
+                    <div class="problem-card scroll-animate" style="--delay: 0.4s;">
+                        <div class="icon-wrapper">
+                            <div class="icon icon-grid"></div>
+                        </div>
+                        <h3>Fragmented Tools</h3>
+                        <p>Juggling multiple apps for one simple plan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section section" id="features">
+        <div class="section-container">
+            <div style="text-align: center;">
+                <h2 class="scroll-animate">Meet limelii</h2>
+                <p class="section-subtitle scroll-animate">The app that transforms how you discover and plan experiences</p>
+            </div>
+            
+            <div class="features-bento">
+                <div class="feature-card large scroll-animate">
+                    <div class="feature-icon">
+                        <div class="icon icon-target"></div>
+                    </div>
+                    <h3>Personalized Just for You</h3>
+                    <p>Get recommendations tailored to your interests, location, and preferences. No more sifting through irrelevant suggestions.</p>
+                </div>
+                <div class="feature-card scroll-animate">
+                    <div class="feature-icon">
+                        <div class="icon icon-sparkle"></div>
+                    </div>
+                    <h3>Expert Curated</h3>
+                    <p>Access adventures crafted by local experts and community enthusiasts.</p>
+                </div>
+                <div class="feature-card tall scroll-animate">
+                    <div class="feature-icon">
+                        <div class="icon icon-mobile"></div>
+                    </div>
+                    <h3>End-to-End Planning</h3>
+                    <p>From discovery to booking to sharing memories – everything you need in one beautifully simple app.</p>
+                </div>
+                <div class="feature-card wide scroll-animate">
+                    <div class="feature-icon">
+                        <div class="icon icon-community"></div>
+                    </div>
+                    <h3>Vibrant Community</h3>
+                    <p>Connect with like-minded adventurers, share discoveries, and get inspired by others' unique experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Types Section -->
+    <section class="diagonal-section">
+        <div class="diagonal-content">
+            <div style="text-align: center;">
+                <h2 class="scroll-animate" style="color: white;">What you'll find on limelii</h2>
+                <p class="section-subtitle scroll-animate" style="color: rgba(255,255,255,0.8);">Curated experiences for every mood and moment</p>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card scroll-animate">
+                    <div class="icon-wrapper">
+                        <div class="icon icon-food"></div>
+                    </div>
+                    <h3>Date Nights</h3>
+                    <p>Romantic restaurants, unique activities, memorable evenings</p>
+                </div>
+                <div class="experience-card scroll-animate">
+                    <div class="icon-wrapper">
+                        <div class="icon icon-nature"></div>
+                    </div>
+                    <h3>Weekend Getaways</h3>
+                    <p>Perfect escapes within driving distance</p>
+                </div>
+                <div class="experience-card scroll-animate">
+                    <div class="icon-wrapper">
+                        <div class="icon icon-wellness"></div>
+                    </div>
+                    <h3>Wellness Escapes</h3>
+                    <p>Spas, retreats, and rejuvenating experiences</p>
+                </div>
+                <div class="experience-card scroll-animate">
+                    <div class="icon-wrapper">
+                        <div class="icon icon-art"></div>
+                    </div>
+                    <h3>Local Adventures</h3>
+                    <p>Hidden gems, cultural experiences, and local favorites</p>
+                </div>
+                <div class="experience-card scroll-animate">
+                    <div class="icon-wrapper">
+                        <div class="icon icon-sun"></div>
+                    </div>
+                    <h3>Outdoor Activities</h3>
+                    <p>Hiking, beaches, parks, and nature experiences</p>
+                </div>
+                <div class="experience-card scroll-animate">
+                    <div class="icon-wrapper">
+                        <div class="icon icon-entertainment"></div>
+                    </div>
+                    <h3>Entertainment</h3>
+                    <p>Shows, events, and nightlife recommendations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beta Section -->
+    <section class="beta-section section" id="beta">
+        <div class="section-container">
+            <div class="beta-grid">
+                <div class="beta-content">
+                    <h2 class="scroll-animate">Be among the first</h2>
+                    <p class="section-subtitle scroll-animate" style="color: rgba(255,255,255,0.9);">Help us perfect limelii while getting exclusive early access and lifetime perks.</p>
+                    <div class="scroll-animate">
+                        <a href="#" class="btn btn-secondary" style="background: white; color: var(--primary);" onclick="showBetaForm()">
+                            <div class="icon icon-rocket" style="color: var(--primary);"></div>
+                            Join Beta Program
+                        </a>
+                        <p style="margin-top: 1rem; color: rgba(255,255,255,0.8); font-weight: 500;">Limited spots available</p>
+                    </div>
+                </div>
+                <div class="beta-visual">
+                    <div class="beta-card scroll-animate">
+                        <div class="icon-wrapper">
+                            <div class="icon icon-rocket"></div>
+                        </div>
+                        <h3>Early Access</h3>
+                        <p>Be first to try limelii before public launch and help shape the future</p>
+                    </div>
+                    <div class="beta-card scroll-animate">
+                        <div class="icon-wrapper">
+                            <div class="icon icon-lightbulb"></div>
+                        </div>
+                        <h3>Direct Impact</h3>
+                        <p>Your feedback will guide our features and development priorities</p>
+                    </div>
+                    <div class="beta-card scroll-animate">
+                        <div class="icon-wrapper">
+                            <div class="icon icon-gift"></div>
+                        </div>
+                        <h3>Lifetime Perks</h3>
+                        <p>Premium access forever and exclusive founding member status</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist Section -->
+    <section class="waitlist-section section" id="waitlist">
+        <div class="section-container">
+            <div class="waitlist-container">
+                <h2 class="scroll-animate">Stay in the loop</h2>
+                <p class="section-subtitle scroll-animate">Be the first to know when limelii launches and get exclusive updates along the way.</p>
+                
+                <form class="waitlist-form scroll-animate" onsubmit="handleWaitlistSubmit(event)">
+                    <input type="email" class="waitlist-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="waitlist-btn">Join Waitlist</button>
+                </form>
+                
+                <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;" class="scroll-animate">No spam, just progress updates and launch notifications</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" title="Instagram">📸</a>
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="Newsletter">📧</a>
+            </div>
+            <p>&copy; 2025 limelii. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">limelii – Where Every Experience Begins</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Advanced scroll animation with stagger
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach((el, index) => {
+            observer.observe(el);
+            if (el.classList.contains('scroll-animate-stagger')) {
+                el.style.setProperty('--delay', `${index * 0.1}s`);
+            }
+        });
+
+        // Mobile menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Enhanced navigation background on scroll with color change
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.classList.remove('scrolled');
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Parallax effects
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            // Hero parallax
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+
+            // Floating cards parallax
+            const floatingCards = document.querySelectorAll('.floating-cards');
+            floatingCards.forEach((card, index) => {
+                const speed = 0.2 + (index * 0.1);
+                card.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Waitlist form submission with animation
+async function handleWaitlistSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const email = form.querySelector('input[type="email"]').value;
+    const btn = form.querySelector('.waitlist-btn');
+    const originalText = btn.textContent;
+    
+    // Validate email
+    if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    // Add loading state
+    btn.textContent = 'Joining...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    
+    try {
+        const response = await fetch('/api/waitlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Success animation
+            btn.textContent = '✓ Joined!';
+            btn.style.background = '#22c55e';
+            btn.style.opacity = '1';
+            
+            // Show success message
+            setTimeout(() => {
+                alert('🎉 Thank you for joining our waitlist!\n\nCheck your email for confirmation. You\'ll be among the first to know when Limelii launches!');
+                form.reset();
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 1500);
+        } else {
+            throw new Error(data.error || 'Failed to join waitlist');
+        }
+    } catch (error) {
+        console.error('Waitlist error:', error);
+        
+        // Error state
+        btn.textContent = 'Try Again';
+        btn.style.background = '#ef4444';
+        btn.style.opacity = '1';
+        btn.disabled = false;
+        
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 3000);
+        
+        alert('Oops! Something went wrong. Please check your internet connection and try again.');
+    }
+}
+
+        // Beta form function
+        function showBetaForm() {
+            // Add shake animation to button
+            const btn = event.target;
+            btn.style.animation = 'shake 0.5s ease-in-out';
+            
+            setTimeout(() => {
+                alert('Beta program coming soon! Join our waitlist to be notified when beta opens.');
+                btn.style.animation = '';
+            }, 500);
+        }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enhanced hover effects
+        document.querySelectorAll('.feature-card, .beta-card, .problem-card, .experience-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+
+        // Phone mockup interaction
+        const phoneMockup = document.querySelector('.phone-mockup');
+        if (phoneMockup) {
+            phoneMockup.addEventListener('mouseenter', () => {
+                phoneMockup.style.transform = 'rotate(-2deg) scale(1.05)';
+            });
+            
+            phoneMockup.addEventListener('mouseleave', () => {
+                phoneMockup.style.transform = 'rotate(-5deg) scale(1)';
+            });
+        }
+
+        // Initialize all animations on load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            document.body.style.transition = 'opacity 0.3s ease';
+        });
+    </script>
+</body>
+</html>
