@@ -276,36 +276,31 @@
         }
 
         /* Hero Section - SHARPENED BACKGROUND IMAGE */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 4rem;
-            padding: 0 2rem;
-            background: /*linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.25))*/, 
-                        url('floatingPark2.png'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: scroll;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            /* SHARPENED IMAGE */
-            filter: contrast(1.1) brightness(1.05);
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
+      .hero {
+        /* NEW DREAMY WAVES BACKGROUND */
+        background: 
+          linear-gradient(135deg, 
+            #FFF0F7 0%,   /* Soft pink */
+            #FEF7FF 25%,  /* Lavender white */
+            #F0F9FF 50%,  /* Sky blue */
+            #FFFBEB 75%,  /* Warm cream */
+            #FDF2F8 100% /* Rose */
+        );
+          color: var(--dark); /* Changed from white to dark text */
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 70%, rgba(232, 90, 123, 0.15) 0%, transparent 50%);
-            pointer-events: none;
+      .hero::before {
+          background: 
+            radial-gradient(ellipse at 30% 20%, rgba(255,154,86,0.12) 0%, transparent 60%),
+            radial-gradient(ellipse at 70% 80%, rgba(255,104,119,0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at 90% 40%, rgba(147,197,253,0.08) 0%, transparent 40%);
+          animation: dreamyFloat 25s ease-in-out infinite;
+        }
+      .hero::after {
+          background: 
+            conic-gradient(from 45deg at 20% 30%, rgba(255,154,86,0.05) 0deg, transparent 120deg),
+            conic-gradient(from 180deg at 80% 70%, rgba(255,104,119,0.04) 0deg, transparent 90deg);
+          animation: gentleRotate 40s linear infinite;
         }
 
         .hero-content {
@@ -403,7 +398,7 @@
             position: absolute;
             width: 140px;
             height: 90px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
             border-radius: 16px;
             box-shadow: 
@@ -417,8 +412,8 @@
             padding: 0.75rem;
             font-size: 0.85rem;
             font-weight: 500;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.4s ease;
         }
 
@@ -449,17 +444,33 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
         }
+        @keyframes dreamyFloat {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+            }
+            33% { 
+                transform: translate(-30px, -20px) scale(1.05);
+            }
+            66% { 
+                transform: translate(20px, -30px) scale(0.95);
+            }
+        }
+
+        @keyframes gentleRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
 
         /* HERO TITLE - UNBOLD */
         .hero h1 {
             font-size: 4.2rem;
             font-weight: 300; /* CHANGED FROM 700 TO UNBOLD */
             margin-bottom: 1.5rem;
-            color: white;
+            color: var(--dark); /* Dark text for light background */
             letter-spacing: -0.04em;
             line-height: 1.1;
             animation: slideInLeft 1s ease-out;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
             white-space: nowrap; /* Keeps it on one line */
         }
 
@@ -467,11 +478,11 @@
         .hero .subtitle {
             font-size: 1.3rem;
             margin-bottom: 3rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--gray-600);
             font-weight: 300;
             line-height: 1.6;
             animation: slideInLeft 1s ease-out 0.2s both;
-            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+            
         }
 
         .cta-buttons {
@@ -1167,8 +1178,6 @@
                 gap: 3rem;
                 padding: 6rem 1rem 3rem;
                 /* FIXED - Ensuring background shows on mobile */
-                background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
-                            url('floatingPark2.png');
                 background-size: cover;
                 background-position: center;
                 background-attachment: scroll;
