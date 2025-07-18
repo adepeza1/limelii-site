@@ -300,8 +300,8 @@
           .hero::before {
                 content: '';
                 position: absolute;
-                top: -25%;
-                left: -25%;
+                top: -35%;
+                left: -35%;
                 width: 100%;
                 height: 100%;
               background: 
@@ -319,8 +319,8 @@
             right: 0;
             bottom: 0;
             background: 
-              conic-gradient(from 45deg at 20% 30%, rgba(255,154,86,0.05) 0deg, transparent 120deg),
-              conic-gradient(from 80deg at 180% 70%, rgba(255,104,119,0.04) 0deg, transparent 90deg);
+              conic-gradient(from 45deg at 20% 30%, rgba(255,154,86,0.12) 0deg, transparent 120deg), /* 0.05 → 0.12 */
+              conic-gradient(from 180deg at 80% 70%, rgba(255,104,119,0.10) 0deg, transparent 90deg), /* 0.04 → 0.10 */
               conic-gradient(from 270deg at 60% 50%, rgba(168,85,247,0.08) 0deg, transparent 100deg); /* NEW LAYER */
 
             animation: gentleRotate 40s linear infinite;
