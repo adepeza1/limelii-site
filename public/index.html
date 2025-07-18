@@ -297,17 +297,31 @@
 
         
           .hero::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
               background: 
                 radial-gradient(ellipse at 30% 20%, rgba(255,154,86,0.12) 0%, transparent 60%),
                 radial-gradient(ellipse at 70% 80%, rgba(255,104,119,0.1) 0%, transparent 50%),
                 radial-gradient(ellipse at 90% 40%, rgba(147,197,253,0.08) 0%, transparent 40%);
             animation: dreamyFloat 25s ease-in-out infinite;
+            pointer-events: none;
           }
       .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: 
               conic-gradient(from 45deg at 20% 30%, rgba(255,154,86,0.05) 0deg, transparent 120deg),
               conic-gradient(from 180deg at 80% 70%, rgba(255,104,119,0.04) 0deg, transparent 90deg);
             animation: gentleRotate 40s linear infinite;
+            pointer-events: none;
         }
 
         .hero-content {
@@ -562,10 +576,10 @@
     }
 }
 
-@keyframes gentleRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+      @keyframes gentleRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
         /* FIXED SPACING - Sections */
         .section {
