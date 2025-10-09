@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     await resend.emails.send({
       from: 'waitlist@limelii.com', // We'll upgrade this to your domain later
       to: process.env.OWNER_EMAIL,
-      subject: '🎉 New Limelii Waitlist Signup!',
+      subject: '🎉 New limelii Waitlist Signup!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #E85A7B;">New Waitlist Signup! 🎉</h2>
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
     // Send welcome email to the user
     await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'waitlist@limelii.com',
       to: email,
       subject: 'Welcome to limelii! 🌟',
       html: `
