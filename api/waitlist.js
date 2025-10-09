@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
     // Send welcome email to the user
     await resend.emails.send({
-      from: 'waitlist@limelii.com',
+      from: 'hello@limelii.com',
       to: email,
       subject: 'Welcome to limelii! 🌟',
       html: `
