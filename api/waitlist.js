@@ -29,7 +29,8 @@ export default async function handler(req, res) {
     // Send notification to you (the owner)
     await resend.emails.send({
       from: 'waitlist@limelii.com', // We'll upgrade this to your domain later
-      to: process.env.OWNER_EMAIL,
+      //to: process.env.OWNER_EMAIL,
+      to: email,
       subject: '🎉 New limelii Waitlist Signup!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
