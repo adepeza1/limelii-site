@@ -3,6 +3,7 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTNFGXVP3R"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LeM0_YrAAAAANlQhkAGyQRaOMtKCrW1eGgooxZ5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -1774,6 +1775,7 @@
         });
 
         // Waitlist form submission with animation
+// Waitlist form submission with reCAPTCHA
 async function handleWaitlistSubmit(event) {
     event.preventDefault();
     
@@ -1792,24 +1794,32 @@ async function handleWaitlistSubmit(event) {
     btn.style.opacity = '0.7';
     
     try {
+        // Get reCAPTCHA token
+        const recaptchaToken = await grecaptcha.execute('6LeM0_YrAAAAANlQhkAGyQRaOMtKCrW1eGgooxZ5', { 
+            action: 'waitlist_submit' 
+        });
+
         const response = await fetch('/api/waitlist', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email })
+            body: JSON.stringify({ 
+                email,
+                recaptchaToken 
+            })
         });
         
         const data = await response.json();
         
         if (response.ok) {
-            // UPDATED FOR EMAIL VERIFICATION
-            btn.textContent = '✓ Check Your Email!';
+            // SUCCESS - welcome email sent
+            btn.textContent = '✓ Welcome!';
             btn.style.background = '#FF9A56';
             btn.style.opacity = '1';
             
             setTimeout(() => {
-                alert('📧 Verification Email Sent!\n\nPlease check your inbox and click the confirmation link to complete your signup.\n\n💡 Don\'t see it? Check your spam folder!');
+                alert('🎉 You\'re on the list!\n\nCheck your email for a welcome message from the limelii team.');
                 form.reset();
                 btn.textContent = originalText;
                 btn.style.background = '';
