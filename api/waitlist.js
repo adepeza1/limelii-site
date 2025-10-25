@@ -98,7 +98,7 @@ export default async function handler(req, res) {
           <div style="text-align: center; padding: 40px 20px;">
             <h1 style="color: #E85A7B; font-size: 2.5rem; margin-bottom: 10px;">limelii</h1>
             <h2 style="color: #333; font-weight: 300;">Thanks for joining our waitlist!</h2>
-            <div style="background: linear-gradient(135deg, #E85A7B, #f0859e); padding: 30px; border-radius: 12px; margin: 30px 0; color: white;">
+            <div style="background: linear-gradient(135deg, #FF9A56, #ff6877); padding: 30px; border-radius: 12px; margin: 30px 0; color: white;">
               <h3 style="margin: 0 0 15px 0;">You're in! 🎉</h3>
               <p style="margin: 0; opacity: 0.9;">You'll be among the first to experience where every adventure begins.</p>
             </div>
@@ -108,6 +108,11 @@ export default async function handler(req, res) {
             <div style="margin: 30px 0; padding: 20px; background: #f9f9f9; border-radius: 8px;">
               <p style="margin: 0; color: #888; font-size: 14px;">
                 Follow us for updates and behind-the-scenes content!
+              </p>
+              <p style="margin: 10px 0 0 0;">
+                <a href="https://instagram.com/getlimelii" style="color: #FF9A56; text-decoration: none; margin: 0 10px;">Instagram</a>
+                <a href="https://twitter.com/getlimelii" style="color: #FF9A56; text-decoration: none; margin: 0 10px;">Twitter</a>
+                <a href="https://tiktok.com/@getlimelii" style="color: #FF9A56; text-decoration: none; margin: 0 10px;">TikTok</a>
               </p>
             </div>
             <p style="color: #E85A7B; font-weight: 500;">
