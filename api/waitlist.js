@@ -1,209 +1,82 @@
-// api/verify.js - EMAIL VERIFICATION HANDLER
+// api/waitlist.js
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Same Map as in waitlist.js (use shared database in production)
-const pendingVerifications = new Map();
-const verifiedEmails = new Set();
-
 export default async function handler(req, res) {
-  const { token } = req.query;
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
-  if (!token) {
-    return res.status(400).send('<h1>Invalid verification link</h1>');
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
   }
   
-  // Check if token exists and is valid
-  const verification = pendingVerifications.get(token);
-  
-  if (!verification) {
-    return res.status(400).send(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <style>
-          body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
-          .container { max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; }
-          h1 { color: #ef4444; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>❌ Invalid Link</h1>
-          <p>This verification link is invalid or has expired.</p>
-          <p><a href="https://limelii.com" style="color: #FF9A56;">Return to limelii.com</a></p>
-        </div>
-      </body>
-      </html>
-    `);
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
-  
-  // Check if expired
-  if (Date.now() > verification.expiresAt) {
-    pendingVerifications.delete(token);
-    return res.status(400).send(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <style>
-          body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
-          .container { max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; }
-          h1 { color: #f59e0b; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>⏰ Link Expired</h1>
-          <p>This verification link has expired. Please sign up again.</p>
-          <p><a href="https://limelii.com" style="color: #FF9A56;">Return to limelii.com</a></p>
-        </div>
-      </body>
-      </html>
-    `);
-  }
-  
-  const { email } = verification;
-  
-  // Check if already verified
-  if (verifiedEmails.has(email)) {
-    return res.status(200).send(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <style>
-          body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
-          .container { max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; }
-          h1 { color: #22c55e; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>✅ Already Verified</h1>
-          <p>Your email has already been confirmed!</p>
-          <p><a href="https://limelii.com" style="color: #FF9A56;">Return to limelii.com</a></p>
-        </div>
-      </body>
-      </html>
-    `);
-  }
-  
+
   try {
-    // Mark as verified
-    verifiedEmails.add(email);
-    pendingVerifications.delete(token);
+    const { email } = req.body;
     
-    console.log(`✅ Email verified: ${email}`);
+    if (!email || !email.includes('@')) {
+      return res.status(400).json({ error: 'Valid email is required' });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
     
-    // Send notification to owner
-    await resend.emails.send({
-      from: 'waitlist@limelii.com',
-      to: process.env.OWNER_EMAIL,
-      subject: '🎉 New limelii Waitlist Signup! (Verified)',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #FF9A56;">New Verified Waitlist Signup! 🎉</h2>
-          <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Status:</strong> ✅ VERIFIED</p>
-            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
-          </div>
-          <p style="color: #666;">This user confirmed their email address.</p>
-        </div>
-      `
-    });
+    // Create token with email data
+    const tokenData = {
+      email: normalizedEmail,
+      timestamp: Date.now(),
+      expiresAt: Date.now() + (24 * 60 * 60 * 1000)
+    };
     
-    // Send welcome email
+    // Encode token
+    const encodedToken = Buffer.from(JSON.stringify(tokenData)).toString('base64url');
+    const verificationLink = `${process.env.BASE_URL || 'https://limelii.com'}/api/verify?token=${encodedToken}`;
+    
+    console.log('📧 Sending verification email to:', normalizedEmail);
+    
+    // Send verification email
     await resend.emails.send({
       from: 'hello@limelii.com',
-      to: email,
-      subject: 'Welcome to limelii! 🌟',
+      to: normalizedEmail,
+      subject: 'Confirm your limelii waitlist signup 🌟',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="text-align: center; padding: 40px 20px;">
-            <h1 style="color: #FF9A56; font-size: 2.5rem; margin-bottom: 10px;">limelii</h1>
-            <h2 style="color: #333; font-weight: 300;">Thanks for joining our waitlist!</h2>
-            
-            <div style="background: linear-gradient(135deg, #FF9A56, #ff6877); padding: 30px; border-radius: 12px; margin: 30px 0; color: white;">
-              <h3 style="margin: 0 0 15px 0;">You're in! 🎉</h3>
-              <p style="margin: 0; opacity: 0.9;">You'll be among the first to experience where every adventure begins.</p>
-            </div>
-            
-            <p style="color: #666; line-height: 1.6;">
-              We're working hard to create something amazing. You'll get exclusive early access and updates as we get closer to launch.
+        <!DOCTYPE html>
+        <html>
+        <body style="font-family: Arial; text-align: center; padding: 40px; background: #f4f4f4;">
+          <div style="max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px;">
+            <h1 style="color: #FF9A56; margin-bottom: 20px;">Confirm Your Email</h1>
+            <p style="color: #666; line-height: 1.6; margin-bottom: 30px;">
+              Thanks for signing up for the limelii waitlist! Click the button below to confirm:
             </p>
-            
-            <div style="margin: 30px 0; padding: 20px; background: #f9f9f9; border-radius: 8px;">
-              <p style="margin: 0; color: #888; font-size: 14px;">
-                Follow us for updates and behind-the-scenes content!
-              </p>
-              <p style="margin: 10px 0 0 0;">
-                <a href="https://instagram.com/getlimelii" style="color: #FF9A56; text-decoration: none; margin: 0 10px;">Instagram</a>
-                <a href="https://twitter.com/getlimelii" style="color: #FF9A56; text-decoration: none; margin: 0 10px;">Twitter</a>
-                <a href="https://tiktok.com/@getlimelii" style="color: #FF9A56; text-decoration: none; margin: 0 10px;">TikTok</a>
-              </p>
-            </div>
-            
-            <p style="color: #FF9A56; font-weight: 500;">
-              Best,<br>The limelii Team
+            <a href="${verificationLink}" 
+               style="display: inline-block; background: linear-gradient(135deg, #FF9A56, #ff6877); color: white; 
+                      padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 600; margin: 20px 0;">
+              Confirm My Email
+            </a>
+            <p style="color: #999; font-size: 14px; margin-top: 30px;">
+              This link expires in 24 hours
             </p>
           </div>
-        </div>
+        </body>
+        </html>
       `
     });
     
-    // Show success page
-    res.status(200).send(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px 20px; 
-            background: linear-gradient(135deg, #FFE1E7, #F8E8FF); 
-            margin: 0;
-          }
-          .container { 
-            max-width: 500px; 
-            margin: 0 auto; 
-            background: white; 
-            padding: 50px 30px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-          }
-          h1 { color: #FF9A56; font-size: 2.5rem; margin: 0 0 20px 0; }
-          p { color: #4A5568; line-height: 1.6; font-size: 1.1rem; }
-          .btn { 
-            display: inline-block; 
-            background: linear-gradient(135deg, #FF9A56, #ff6877); 
-            color: white; 
-            padding: 15px 40px; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            margin-top: 30px;
-            font-weight: 600;
-          }
-          .emoji { font-size: 3rem; margin-bottom: 20px; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="emoji">🎉</div>
-          <h1>You're Verified!</h1>
-          <p>Thank you for confirming your email. You're now on the limelii waitlist!</p>
-          <p>Check your inbox for a welcome email with more details.</p>
-          <a href="https://limelii.com" class="btn">Visit limelii.com</a>
-        </div>
-      </body>
-      </html>
-    `);
+    console.log('✅ Verification email sent successfully');
+    
+    return res.status(200).json({ 
+      success: true, 
+      message: 'Please check your email to confirm your signup!' 
+    });
     
   } catch (error) {
-    console.error('Verification error:', error);
-    res.status(500).send('<h1>Error processing verification</h1>');
+    console.error('❌ Waitlist error:', error);
+    return res.status(500).json({ 
+      error: 'Failed to send verification email. Please try again.' 
+    });
   }
 }
