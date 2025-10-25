@@ -96,7 +96,7 @@ export default async function handler(req, res) {
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="text-align: center; padding: 40px 20px;">
-            <h1 style="color: #E85A7B; font-size: 2.5rem; margin-bottom: 10px;">limelii</h1>
+            <img src="logo.png" alt="limelii" style="width: 200px; height: auto; margin-bottom: 20px;">
             <h2 style="color: #333; font-weight: 300;">Thanks for joining our waitlist!</h2>
             <div style="background: linear-gradient(135deg, #FF9A56, #ff6877); padding: 30px; border-radius: 12px; margin: 30px 0; color: white;">
               <h3 style="margin: 0 0 15px 0;">You're in! 🎉</h3>
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
                 <a href="https://tiktok.com/@getlimelii" style="color: #FF9A56; text-decoration: none; margin: 0 10px;">TikTok</a>
               </p>
             </div>
-            <p style="color: #E85A7B; font-weight: 500;">
+            <p style="color: #FF9A56; font-weight: 500;">
               Best,<br>The limelii Team
             </p>
           </div>
