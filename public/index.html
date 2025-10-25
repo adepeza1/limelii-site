@@ -1782,13 +1782,11 @@ async function handleWaitlistSubmit(event) {
     const btn = form.querySelector('.waitlist-btn');
     const originalText = btn.textContent;
     
-    // Validate email
     if (!email || !email.includes('@')) {
         alert('Please enter a valid email address');
         return;
     }
     
-    // Add loading state
     btn.textContent = 'Joining...';
     btn.disabled = true;
     btn.style.opacity = '0.7';
@@ -1805,14 +1803,13 @@ async function handleWaitlistSubmit(event) {
         const data = await response.json();
         
         if (response.ok) {
-            // Success animation
-            btn.textContent = '✓ Joined!';
-            btn.style.background = '#22c55e';
+            // UPDATED FOR EMAIL VERIFICATION
+            btn.textContent = '✓ Check Your Email!';
+            btn.style.background = '#FF9A56';
             btn.style.opacity = '1';
             
-            // Show success message
             setTimeout(() => {
-                alert('🎉 Thank you for joining our waitlist!\n\nCheck your email for confirmation. You\'ll be among the first to know when Limelii launches!');
+                alert('📧 Verification Email Sent!\n\nPlease check your inbox and click the confirmation link to complete your signup.\n\n💡 Don\'t see it? Check your spam folder!');
                 form.reset();
                 btn.textContent = originalText;
                 btn.style.background = '';
@@ -1823,8 +1820,6 @@ async function handleWaitlistSubmit(event) {
         }
     } catch (error) {
         console.error('Waitlist error:', error);
-        
-        // Error state
         btn.textContent = 'Try Again';
         btn.style.background = '#ef4444';
         btn.style.opacity = '1';
@@ -1835,7 +1830,7 @@ async function handleWaitlistSubmit(event) {
             btn.style.background = '';
         }, 3000);
         
-        alert('Oops! Something went wrong. Please check your internet connection and try again.');
+        alert('Oops! Something went wrong. Please try again.');
     }
 }
 
