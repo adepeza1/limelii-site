@@ -210,15 +210,3 @@ export default async function handler(req, res) {
     `);
   }
 }
-```
-
----
-
-## Your Project Structure Should Be:
-```
-limelii-site/
-├── index.html
-├── api/
-│   ├── waitlist.js  ← Sends verification email
-│   └── verify.js    ← Handles clicking the link (CREATE THIS)
-└── (other files...)
