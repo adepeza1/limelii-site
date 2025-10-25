@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     await resend.emails.send({
       from: 'hello@limelii.com',
       to: normalizedEmail,
-      subject: 'Confirm your limelii waitlist signup 🌟',
+      subject: 'Confirm your limelii waitlist signup',
       html: `
         <!DOCTYPE html>
         <html>
