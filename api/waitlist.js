@@ -96,7 +96,7 @@ export default async function handler(req, res) {
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="text-align: center; padding: 40px 20px;">
-            <img src="logo.png" alt="limelii" style="width: 200px; height: auto; margin-bottom: 20px;">
+            <img src="https://limelii.com/logo.png" alt="limelii" style="width: 200px; height: auto; margin-bottom: 20px;">
             <h2 style="color: #333; font-weight: 300;">Thanks for joining our waitlist!</h2>
             <div style="background: linear-gradient(135deg, #FF9A56, #ff6877); padding: 30px; border-radius: 12px; margin: 30px 0; color: white;">
               <h3 style="margin: 0 0 15px 0;">You're in! 🎉</h3>
