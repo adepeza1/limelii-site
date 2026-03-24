@@ -804,6 +804,7 @@
             transform: skewY(-3deg);
             margin-top: 6rem; /* REDUCED FROM 8rem */
             margin-bottom: 6rem; /* REDUCED FROM 8rem */
+            overflow: hidden;
         }
 
         .diagonal-content {
@@ -1289,10 +1290,30 @@
                 margin-right: auto;
             }
 
-            .problem-visual,
-            .experience-grid {
+            .problem-visual {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+            }
+
+            .experience-grid {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 1rem;
+                margin-top: 2rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .experience-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .experience-card {
+                flex: 0 0 100%;
+                scroll-snap-align: start;
             }
 
             .problem-card,
